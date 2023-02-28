@@ -1,10 +1,10 @@
 // values that need to query as id
-const ids = ['board', 'snake-speed', 'pause', 'squareSnake'];
+const ids = ['board', 'snake-speed', 'pause'];
 // values of audio defining
 const mp3s = ['moveSound', 'foodSound', 'gameOverSound'];
 // vars --
 // vars of element getting by id
-const [board, snakeSpeed, pause, squareSnake] = ids.map((i) => document.getElementById(i));
+const [board, snakeSpeed, pause] = ids.map((i) => document.getElementById(i));
 // vars of audios
 const [moveSound, footSound, gameOverSound] = mp3s.map((a) => new Audio('audio/' + a + '.mp3'));
 // normal constant vars ---
@@ -33,8 +33,8 @@ const food = { x: 10, y: 10 },
     snakePartClasses = $('.snake-head, .snake-body, .snake-foot')
 // moved direction ,, it will run on each frame and will add/sub the x/y value
 let runningNow = false;
-let maxX = 40 - 1;
-let maxY = 40 - 1;
+let maxX = 30 - 1;
+let maxY = 30 - 1;
 const movedDirection = {
     x: 1,
     y: 0,
@@ -123,20 +123,7 @@ const showAlertBox = (title = 'Game Over !!!', content = '', button1 = 'Close') 
     const div = document.createElement('div');
     div.className = 'modal';
     div.tabIndex = '-1';
-    div.innerHTML =
-   `
-       <div class="modal-dialog">
-           <div class="modal-content">
-               <div class="modal-header">
-                   <h5 class="modal-title">${title}</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               </div>
-               <div class="modal-body">${content}</div>
-               <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${button1}</button>
-               </div>
-           </div>
-       </div>
-   `;
+    div.innerHTML =`<div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">${title}</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">${content}</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">${button1}</button></div></div></div>`;
     document.body.appendChild(div);
     $('.modal').modal('show');
 };
@@ -144,7 +131,6 @@ const showAlertBox = (title = 'Game Over !!!', content = '', button1 = 'Close') 
 
 function gameEngine() {
     // 1) snake body display
-    snakePartClasses.css({ 'border-radius': squareSnake ? '2px' : '50px' })
     alreadyShown = false;
     const snkLen = snakeBodyAllParts.length;
     const snakeHeadPartIndex = snkLen - 1;
@@ -315,30 +301,7 @@ if (!isMobileSessionStorage) {
     $('header').removeClass('none');
     $('.closeBox').hide();
 }
-// turn on or off box grid border
-$('#bigField, #squareSnake').on('change', function () {
-    $(this).blur();
-    if (this.id === 'bigField') {
-        resetBoard();
-        if (this.checked) {
-            maxX = 40 - 1;
-            maxY = 40 - 1;
-            $('#board').attr('style', 'grid-template-rows:repeat(40, 1fr)!important;grid-template-columns:repeat(40,1fr)!important');
-        } else {
-            maxX = 30 - 1;
-            maxY = 30 - 1;
-            $('#board').attr('style', 'grid-template-rows:repeat(30, 1fr)!important;grid-template-columns:repeat(30,1fr)!important');
-        }
-    } else {
-        if (this.checked) {
-            ;
-        } else {
-            $('.snake-head, .snake-body, .snake-foot').css({ 'border-radius': '50px' });
-        }
-    }
-});
 // function/methods run on load
 resetBoard();
 displayScoreBoard();
-snakePartClasses.css({ 'border-radius': squareSnake ? '2px' : '50px' })
 
