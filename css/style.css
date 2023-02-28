@@ -164,6 +164,18 @@ input[type=range] {
     accent-color: rgb(29, 240, 39) !important;
 }
 
+.linkTag a {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.linkTag a:hover,
+.linkTag a:active,
+.linkTag a:focus {
+    text-decoration: none;
+    color: white !important;
+}
+
 /* utility */
 .none {
     display: none;
