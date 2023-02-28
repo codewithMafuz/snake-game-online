@@ -6,7 +6,7 @@ const mp3s = ['moveSound', 'foodSound', 'gameOverSound'];
 // vars of element getting by id
 const [board, snakeSpeed, pause, squareSnake] = ids.map((i) => document.getElementById(i));
 // vars of audios
-const [moveSound, footSound, gameOverSound] = mp3s.map((a) => new Audio('../audio/' + a + '.mp3'));
+const [moveSound, footSound, gameOverSound] = mp3s.map((a) => new Audio('audio/' + a + '.mp3'));
 // normal constant vars ---
 let animationFrameRunning; let score = 0;
 let highScore = JSON.parse(localStorage.getItem('highScore'));
